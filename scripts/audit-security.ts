@@ -13,7 +13,17 @@ type Finding = {
 const repoRoot = process.cwd();
 const sourceExtensions = new Set([".ts", ".md", ".json"]);
 const runtimeRoots = ["src"];
-const publicOutputRoots = ["README.md", "docs", "src/prompts", "src/resources"];
+const publicOutputRoots = [
+  "README.md",
+  "SECURITY.md",
+  "PRIVACY.md",
+  "LICENSE.md",
+  "server.json",
+  "src/prompts",
+  "src/resources",
+  "src/constants/publicCopy.ts",
+  "src/worker.ts"
+];
 const ignoredDirectories = new Set(["node_modules", "dist", ".git", ".tools"]);
 const ignoredFiles = new Set(["scripts/audit-security.ts"]);
 
@@ -31,6 +41,16 @@ const secretPatterns = [
   { label: "private URL", pattern: /https?:\/\/(localhost|127\.0\.0\.1|10\.|192\.168\.|172\.(1[6-9]|2\d|3[0-1])\.)/i },
   { label: "local Windows path", pattern: /\b[A-Z]:[\\/](Users|Projects|Documents|Downloads|Desktop)[\\/]/i },
   { label: "local project path", pattern: /\b[A-Z]:\\[^\\\r\n]{1,80}\\[^\\\r\n]{1,80}\\Projects\\/i }
+];
+
+const publicLanguagePatterns = [
+  {
+    label: "Vietnamese text",
+    pattern:
+      /[ăâđêôơưáàảãạấầẩẫậắằẳẵặéèẻẽẹếềểễệíìỉĩịóòỏõọốồổỗộớờởỡợúùủũụứừửữựýỳỷỹỵ]/i
+  },
+  { label: "internal docs reference", pattern: /\bdocs[\\/]|PRODUCT_SPEC|CHANGELOG|prepublish|deployment|marketing launch/i },
+  { label: "local development guidance", pattern: /\bnpm\s+run\s+(build|dev|test|lint|verify|audit|deploy)/i }
 ];
 
 async function main() {
@@ -66,6 +86,11 @@ async function main() {
     for (const pattern of FORBIDDEN_PUBLIC_PATTERNS) {
       if (pattern.test(text)) {
         findings.push({ file: relativePath(file), message: `Public output file matches forbidden private-methodology pattern '${pattern}'.` });
+      }
+    }
+    for (const check of publicLanguagePatterns) {
+      if (check.pattern.test(text)) {
+        findings.push({ file: relativePath(file), message: `Public output file contains ${check.label}.` });
       }
     }
   }

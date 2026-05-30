@@ -1,6 +1,6 @@
 {
   "name": "ai-business-system-advisor-mcp",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Public-safe MCP server for first-pass AI business system reviews and intake packets.",
   "type": "module",
   "private": false,

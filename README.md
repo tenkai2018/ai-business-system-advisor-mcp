@@ -1,10 +1,10 @@
 # AI Business System Advisor MCP
 
-This MCP server helps founders, operators, and service businesses review where AI can improve operations without damaging customer trust, service quality, or human judgment.
+AI Business System Advisor MCP helps founders, operators, and service businesses review where AI can improve operations without damaging customer trust, service quality, or human judgment.
 
-It provides public-safe tools for business context analysis, customer touchpoint mapping, AI opportunity evaluation, trust/control risk assessment, first workflow recommendation, mini report generation, next-step category recommendation, and intake packet export.
+It provides first-pass, public-safe tools for business context analysis, customer touchpoint mapping, AI opportunity evaluation, trust/control risk assessment, first workflow recommendation, mini report generation, next-step category recommendation, and intake packet export.
 
-It is a first-pass review tool. It does not replace a full professional diagnostic or implementation project.
+This server is a practical review aid. It does not replace professional consulting, legal, financial, medical, HR, or compliance advice.
 
 ## Use With MCP Clients
 
@@ -27,18 +27,10 @@ You can also run the package directly:
 npx -y ai-business-system-advisor-mcp
 ```
 
-Remote MCP URL:
+For remote MCP clients, use:
 
 ```text
 https://ai-business-system-advisor-mcp.henrytran-portfolio.workers.dev/mcp
-```
-
-## Local Development
-
-```bash
-npm install
-npm run build
-npm run dev
 ```
 
 ## Tools
@@ -69,24 +61,10 @@ npm run dev
 - Sample intake packet
 - Privacy note
 
-## Development
+## Privacy And Safety
 
-```bash
-npm run typecheck
-npm test
-npm run build
-npm run lint
-npm run demo
-npm run dev:remote
-npm run validate:registry
-npm run verify:publish
-```
+The server is read-mostly and does not intentionally persist submitted business context. Do not send passwords, API keys, raw private customer records, regulated data, or confidential contracts.
 
-## Public Safety
+Outputs are first-pass reviews based on the information provided. They focus on business context, workflow fit, risk controls, recommended next steps, and missing information.
 
-The server uses business-facing language and refuses requests for private implementation details. Public reports focus on business context, workflow fit, risk controls, recommended next steps, and missing information.
-
-## Registry
-
-- MCP Registry name: `io.github.tenkai2018/ai-business-system-advisor-mcp`
-- Registry metadata: `server.json`
+The server refuses requests for private implementation details and keeps user-facing output in business-facing language.

@@ -4,7 +4,7 @@ function envValue(name: string): string {
 
 export const config = {
   serverName: envValue("MCP_SERVER_NAME") || "ai-business-system-advisor",
-  serverVersion: envValue("MCP_SERVER_VERSION") || "0.1.0",
+  serverVersion: envValue("MCP_SERVER_VERSION") || "0.1.3",
   publicWebsiteUrl: envValue("PUBLIC_WEBSITE_URL"),
   bookingUrl: envValue("BOOKING_URL"),
   beehiivUrl: envValue("BEEHIIV_URL"),
