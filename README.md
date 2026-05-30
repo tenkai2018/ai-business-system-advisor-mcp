@@ -27,8 +27,6 @@ You can also run the package directly:
 npx -y ai-business-system-advisor-mcp
 ```
 
-Remote MCP deployment is supported on Cloudflare Workers. See `docs/remote-mcp.md`.
-
 Remote MCP URL:
 
 ```text
@@ -88,22 +86,7 @@ npm run verify:publish
 
 The server uses business-facing language and refuses requests for private implementation details. Public reports focus on business context, workflow fit, risk controls, recommended next steps, and missing information.
 
-## Publishing
+## Registry
 
-This package is prepared for npm and MCP Registry publishing:
-
-- npm binary: `ai-business-system-advisor-mcp`
 - MCP Registry name: `io.github.tenkai2018/ai-business-system-advisor-mcp`
 - Registry metadata: `server.json`
-- Publish workflow: `.github/workflows/publish-mcp.yml`
-- Remote deployment guide: `docs/remote-mcp.md`
-
-Before publishing under a different GitHub account or organization, update `mcpName` in `package.json`, `name` and `repository.url` in `server.json`, and the repository URL in `package.json`.
-
-See:
-
-- `docs/publishing.md`
-- `docs/distribution-playbook.md`
-- `docs/deployment.md`
-- `docs/remote-mcp.md`
-- `docs/marketing-launch.md`

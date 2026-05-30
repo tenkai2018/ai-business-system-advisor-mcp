@@ -15,7 +15,7 @@ const sourceExtensions = new Set([".ts", ".md", ".json"]);
 const runtimeRoots = ["src"];
 const publicOutputRoots = ["README.md", "docs", "src/prompts", "src/resources"];
 const ignoredDirectories = new Set(["node_modules", "dist", ".git", ".tools"]);
-const ignoredFiles = new Set(["PRODUCT_SPEC.md", "scripts/audit-security.ts"]);
+const ignoredFiles = new Set(["scripts/audit-security.ts"]);
 
 const dangerousRuntimePatterns = [
   { label: "command execution module", pattern: /\bchild_process\b|\bnode:child_process\b/ },
