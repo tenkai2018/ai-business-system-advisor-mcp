@@ -14,6 +14,9 @@ const mcpOptions = {
   }
 };
 
+const PACKAGE_URL = "https://www.npmjs.com/package/ai-business-system-advisor-mcp";
+const REPOSITORY_URL = "https://github.com/tenkai2018/ai-business-system-advisor-mcp";
+
 export default {
   async fetch(request: Request, env: unknown, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
@@ -33,6 +36,15 @@ export default {
         version: config.serverVersion,
         transport: "streamable-http",
         mcp: `${url.origin}/mcp`
+      });
+    }
+
+    if (url.pathname === "/.well-known/mcp/server-card.json") {
+      return Response.json(serverCard(url.origin), {
+        headers: {
+          "access-control-allow-origin": "*",
+          "cache-control": "public, max-age=3600"
+        }
       });
     }
 
@@ -62,6 +74,38 @@ function withCors(response: Response): Response {
   });
 }
 
+function serverCard(origin: string) {
+  return {
+    name: "AI Business System Advisor MCP",
+    description:
+      "Review business workflows, AI opportunities, trust/control risks, and implementation readiness before building AI agents or automation.",
+    homepage: `${origin}/`,
+    repository: REPOSITORY_URL,
+    transport: {
+      type: "streamable-http",
+      url: `${origin}/mcp`
+    },
+    categories: ["business", "ai-agents", "automation", "operations", "consulting"],
+    prompts: [
+      "run_mini_business_system_review",
+      "evaluate_ai_workflow_idea",
+      "prepare_diagnostic_intake",
+      "governance_gap_snapshot"
+    ],
+    tools: [
+      "analyze_business_context",
+      "map_customer_touchpoints",
+      "identify_bottlenecks",
+      "evaluate_ai_opportunities",
+      "assess_trust_control_risks",
+      "recommend_first_workflow",
+      "generate_mini_report",
+      "recommend_next_step",
+      "export_intake_packet"
+    ]
+  };
+}
+
 function renderLandingPage(origin: string): string {
   const remoteUrl = `${origin}/mcp`;
 
@@ -73,7 +117,7 @@ function renderLandingPage(origin: string): string {
     <title>AI Business System Advisor MCP</title>
     <meta
       name="description"
-      content="Public-safe MCP server for first-pass AI business workflow, bottleneck, risk, and intake reviews."
+      content="Find the safest first AI workflow for your business before investing in AI agents or automation."
     />
     <style>
       :root {
@@ -86,7 +130,7 @@ function renderLandingPage(origin: string): string {
         margin: 0;
       }
       main {
-        max-width: 920px;
+        max-width: 980px;
         margin: 0 auto;
         padding: 64px 24px;
       }
@@ -108,6 +152,26 @@ function renderLandingPage(origin: string): string {
         max-width: 760px;
         font-size: 1.2rem;
         color: #475569;
+      }
+      .section {
+        border-top: 1px solid #d8dee8;
+        margin-top: 36px;
+        padding-top: 24px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 14px;
+      }
+      .card {
+        border: 1px solid #d8dee8;
+        border-radius: 8px;
+        background: #ffffff;
+        padding: 16px;
+      }
+      .card h3 {
+        margin: 0 0 8px;
+        font-size: 1rem;
       }
       code,
       pre {
@@ -135,27 +199,88 @@ function renderLandingPage(origin: string): string {
         padding: 10px 14px;
         text-decoration: none;
       }
+      .primary {
+        background: #0f766e;
+        color: #ffffff;
+      }
     </style>
   </head>
   <body>
     <main>
-      <h1>AI Business System Advisor MCP</h1>
+      <h1>Find the safest first AI workflow for your business.</h1>
       <p class="lead">
-        A public-safe MCP server that helps founders and operators review business context, bottlenecks,
-        AI workflow opportunities, trust/control risks, and the safest first workflow to improve.
+        AI Business System Advisor MCP helps founders, operators, consultants, and small teams review business
+        context, operational bottlenecks, AI opportunities, trust/control risks, and implementation readiness.
       </p>
       <div class="links">
-        <a href="https://www.npmjs.com/package/ai-business-system-advisor-mcp">npm package</a>
-        <a href="https://github.com/tenkai2018/ai-business-system-advisor-mcp">GitHub repo</a>
+        <a class="primary" href="#remote">Run with remote MCP</a>
+        <a href="${PACKAGE_URL}">npm package</a>
+        <a href="${REPOSITORY_URL}">GitHub repo</a>
         <a href="/health">Health check</a>
       </div>
 
+      <section class="section">
+        <h2>What It Helps You Do</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Identify bottlenecks</h3>
+            <p>Review revenue, operations, customer experience, and trust/control friction.</p>
+          </div>
+          <div class="card">
+            <h3>Evaluate AI ideas</h3>
+            <p>Check whether an AI workflow idea is useful, ready, safe, and reviewable.</p>
+          </div>
+          <div class="card">
+            <h3>Design human control</h3>
+            <p>Clarify review rules, escalation triggers, data boundaries, and quality checks.</p>
+          </div>
+          <div class="card">
+            <h3>Prepare next steps</h3>
+            <p>Generate a mini review or structured intake packet for deeper workflow planning.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Who It Is For</h2>
+        <ul>
+          <li>Solo founders and operators</li>
+          <li>Service businesses and agencies</li>
+          <li>B2B consultants and small teams</li>
+          <li>Teams exploring AI agents or workflow automation</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>Example Questions</h2>
+        <ul>
+          <li>Which workflow should I automate first?</li>
+          <li>Is this AI agent idea safe for my customer experience?</li>
+          <li>Where should humans stay in control?</li>
+          <li>What information is missing before implementation?</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>Example Output</h2>
+        <pre><code>AI Workflow Readiness: Medium
+Recommended First Workflow: Proposal drafting with human approval
+Trust Risk: Medium
+Human Review Rule: Review pricing, scope, claims, and customer-facing promises
+Missing Information: customer journey, approved claims, escalation triggers, success metrics</code></pre>
+      </section>
+
+      <section class="section" id="remote">
       <h2>Remote MCP URL</h2>
       <pre><code>${escapeHtml(remoteUrl)}</code></pre>
+      </section>
 
+      <section class="section">
       <h2>Local MCP Install</h2>
       <pre><code>npx -y ai-business-system-advisor-mcp</code></pre>
+      </section>
 
+      <section class="section">
       <h2>Sample Prompts</h2>
       <ul>
         <li>Review my business: I run a landing page agency for ecommerce brands and spend too much time on lead research and proposals.</li>
@@ -163,12 +288,23 @@ function renderLandingPage(origin: string): string {
         <li>Is it safe to fully automate ecommerce complaints, refunds, and angry customer replies?</li>
         <li>Prepare a mini business system review and tell me what information is missing.</li>
       </ul>
+      </section>
 
+      <section class="section">
       <h2>Privacy</h2>
       <p>
-        This public v0.1 endpoint is stateless and does not intentionally store submitted business context.
+        This public endpoint is stateless and does not intentionally store submitted business context.
         Do not send passwords, API keys, raw private customer records, regulated data, or confidential contracts.
       </p>
+      </section>
+
+      <section class="section">
+        <h2>Public Safety Boundary</h2>
+        <p>
+          The MCP provides public-safe business reviews. It does not expose protected implementation details,
+          exact formulas, confidential designs, or client-specific confidential data.
+        </p>
+      </section>
     </main>
   </body>
 </html>`;

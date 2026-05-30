@@ -1,10 +1,38 @@
 # AI Business System Advisor MCP
 
-AI Business System Advisor MCP helps founders, operators, and service businesses review where AI can improve operations without damaging customer trust, service quality, or human judgment.
+Find the safest first AI workflow for your business.
 
-It provides first-pass, public-safe tools for business context analysis, customer touchpoint mapping, AI opportunity evaluation, trust/control risk assessment, first workflow recommendation, mini report generation, next-step category recommendation, and intake packet export.
+AI Business System Advisor MCP helps founders, operators, consultants, and small teams review business workflows, AI opportunities, trust/control risks, and implementation readiness before building AI agents or automation.
 
-This server is a practical review aid. It does not replace professional consulting, legal, financial, medical, HR, or compliance advice.
+It produces a public-safe mini review, recommends a practical first AI-human workflow, and exports a structured intake packet for deeper review or implementation planning.
+
+This MCP is designed for business-system thinking, not generic chatbot recommendations or tool-first automation.
+
+## What It Does
+
+- Reviews business context, target customers, offers, workflows, and goals.
+- Identifies operational bottlenecks and customer journey friction.
+- Evaluates AI workflow ideas for value, readiness, and trust/control risk.
+- Recommends a narrow first AI-human workflow with review and escalation rules.
+- Generates mini reports and structured intake packets.
+
+## Who It Is For
+
+- Solo founders
+- Service businesses
+- B2B consultants
+- Agency owners
+- Operators
+- Small teams exploring AI agents or automation
+
+## Problems It Helps Solve
+
+- Which workflow should I automate first?
+- Is this AI agent idea safe for my customer experience?
+- Where should humans stay in control?
+- What trust/control risks exist in this workflow?
+- What information is missing before implementation?
+- How should I prepare this business for AI automation?
 
 ## Use With MCP Clients
 
@@ -33,7 +61,7 @@ For remote MCP clients, use:
 https://ai-business-system-advisor-mcp.henrytran-portfolio.workers.dev/mcp
 ```
 
-## Tools
+## Available Tools
 
 - `analyze_business_context`
 - `map_customer_touchpoints`
@@ -45,14 +73,14 @@ https://ai-business-system-advisor-mcp.henrytran-portfolio.workers.dev/mcp
 - `recommend_next_step`
 - `export_intake_packet`
 
-## Prompts
+## Available Prompts
 
 - `run_mini_business_system_review`
 - `evaluate_ai_workflow_idea`
 - `prepare_diagnostic_intake`
 - `governance_gap_snapshot`
 
-## Resources
+## Available Resources
 
 - Overview
 - How it works
@@ -61,10 +89,42 @@ https://ai-business-system-advisor-mcp.henrytran-portfolio.workers.dev/mcp
 - Sample intake packet
 - Privacy note
 
-## Privacy And Safety
+## Example Questions
+
+Ask your AI assistant:
+
+- Review my business and identify the safest first AI workflow to improve.
+- Is this AI agent idea safe for customer support, refunds, and complaints?
+- Where should humans stay in control in this workflow?
+- What trust/control risks should I consider before automating this process?
+- Generate a mini business system review and tell me what information is missing.
+- Export an intake packet for deeper workflow review.
+
+## Example Output
+
+```text
+AI Workflow Readiness: Medium
+Recommended First Workflow: Lead research and qualification with human-approved proposal drafting
+Trust Risk: Medium
+Human Review Rule: Human approval is required before customer-facing promises, pricing, scope, or exceptions.
+Missing Information: ideal customer criteria, proposal rules, approved claims, success metrics, escalation triggers
+```
+
+## Privacy And Security
 
 The server is read-mostly and does not intentionally persist submitted business context. Do not send passwords, API keys, raw private customer records, regulated data, or confidential contracts.
 
-Outputs are first-pass reviews based on the information provided. They focus on business context, workflow fit, risk controls, recommended next steps, and missing information.
+Outputs are first-pass reviews based on the information provided. They are not legal, financial, medical, HR, or compliance advice.
 
-The server refuses requests for private implementation details and keeps user-facing output in business-facing language.
+## Public Safety Boundary
+
+The server uses business-facing language and refuses requests for private implementation details. Public outputs focus on business context, workflow fit, risk controls, recommended next steps, and missing information.
+
+It does not expose protected implementation details, exact formulas, confidential designs, or client-specific confidential data.
+
+## Roadmap
+
+- More fictional sample reviews for common business types.
+- Optional custom-domain remote MCP endpoint.
+- Public website workflow for guided mini reviews.
+- Additional public resources for AI workflow readiness and human review design.
