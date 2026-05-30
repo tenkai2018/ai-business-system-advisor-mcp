@@ -3,7 +3,7 @@ import tseslint from "typescript-eslint";
 
 export default tseslint.config(
   {
-    ignores: ["dist/**", "node_modules/**"]
+    ignores: ["dist/**", "node_modules/**", ".wrangler/**", ".tmp/**"]
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,
@@ -11,7 +11,11 @@ export default tseslint.config(
     languageOptions: {
       globals: {
         process: "readonly",
-        console: "readonly"
+        console: "readonly",
+        Request: "readonly",
+        Response: "readonly",
+        URL: "readonly",
+        Headers: "readonly"
       }
     },
     rules: {

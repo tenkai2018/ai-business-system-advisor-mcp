@@ -1,14 +1,18 @@
+function envValue(name: string): string {
+  return typeof process !== "undefined" && process.env ? process.env[name] || "" : "";
+}
+
 export const config = {
-  serverName: process.env.MCP_SERVER_NAME || "ai-business-system-advisor",
-  serverVersion: process.env.MCP_SERVER_VERSION || "0.1.0",
-  publicWebsiteUrl: process.env.PUBLIC_WEBSITE_URL || "",
-  bookingUrl: process.env.BOOKING_URL || "",
-  beehiivUrl: process.env.BEEHIIV_URL || "",
-  gumroadUrl: process.env.GUMROAD_URL || "",
-  contactEmail: process.env.CONTACT_EMAIL || "",
-  enableDebugLogs: process.env.ENABLE_DEBUG_LOGS === "true",
-  enableHttpTransport: process.env.ENABLE_HTTP_TRANSPORT === "true",
-  httpPort: Number(process.env.HTTP_PORT || "3000")
+  serverName: envValue("MCP_SERVER_NAME") || "ai-business-system-advisor",
+  serverVersion: envValue("MCP_SERVER_VERSION") || "0.1.0",
+  publicWebsiteUrl: envValue("PUBLIC_WEBSITE_URL"),
+  bookingUrl: envValue("BOOKING_URL"),
+  beehiivUrl: envValue("BEEHIIV_URL"),
+  gumroadUrl: envValue("GUMROAD_URL"),
+  contactEmail: envValue("CONTACT_EMAIL"),
+  enableDebugLogs: envValue("ENABLE_DEBUG_LOGS") === "true",
+  enableHttpTransport: envValue("ENABLE_HTTP_TRANSPORT") === "true",
+  httpPort: Number(envValue("HTTP_PORT") || "3000")
 };
 
 export function configuredCtas(): string[] {

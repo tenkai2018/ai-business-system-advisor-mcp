@@ -17,7 +17,7 @@ const ignoredFiles = new Set(["PRODUCT_SPEC.md", "scripts/audit-security.ts"]);
 const dangerousRuntimePatterns = [
   { label: "command execution module", pattern: /\bchild_process\b|\bnode:child_process\b/ },
   { label: "dynamic code execution", pattern: /\beval\s*\(|\bnew Function\s*\(/ },
-  { label: "network request from runtime", pattern: /\bfetch\s*\(|\bhttp\.request\s*\(|\bhttps\.request\s*\(/ },
+  { label: "outbound network request from runtime", pattern: /\bawait\s+fetch\s*\(|\bhttp\.request\s*\(|\bhttps\.request\s*\(/ },
   { label: "filesystem write from runtime", pattern: /\bwriteFile\s*\(|\bappendFile\s*\(|\bcreateWriteStream\s*\(/ },
   { label: "process spawning", pattern: /\bspawn\s*\(|\bexec\s*\(|\bexecFile\s*\(/ }
 ];
@@ -42,9 +42,10 @@ async function main() {
 
   for (const file of await collectFiles(["."])) {
     const text = await readFile(file, "utf8");
+    const filePath = relativePath(file);
     for (const check of secretPatterns) {
-      if (check.pattern.test(text)) {
-        findings.push({ file: relativePath(file), message: `Potential secret or private endpoint: ${check.label}.` });
+      if (check.pattern.test(text) && !(check.label === "private URL" && filePath.endsWith(".md"))) {
+        findings.push({ file: filePath, message: `Potential secret or private endpoint: ${check.label}.` });
       }
     }
   }

@@ -34,6 +34,14 @@ For an MCP client, configure a stdio server command:
 
 Run `npm run build` before using the `node dist/...` command.
 
+Published npm command:
+
+```bash
+npx -y ai-business-system-advisor-mcp
+```
+
+Remote MCP deployment is supported on Cloudflare Workers. See `docs/remote-mcp.md`.
+
 ## Tools
 
 - `analyze_business_context`
@@ -70,6 +78,7 @@ npm test
 npm run build
 npm run lint
 npm run demo
+npm run dev:remote
 npm run validate:registry
 npm run verify:publish
 ```
@@ -86,6 +95,7 @@ This package is prepared for npm and MCP Registry publishing:
 - MCP Registry name: `io.github.tenkai2018/ai-business-system-advisor-mcp`
 - Registry metadata: `server.json`
 - Publish workflow: `.github/workflows/publish-mcp.yml`
+- Remote deployment guide: `docs/remote-mcp.md`
 
 Before publishing under a different GitHub account or organization, update `mcpName` in `package.json`, `name` and `repository.url` in `server.json`, and the repository URL in `package.json`.
 
@@ -94,3 +104,5 @@ See:
 - `docs/publishing.md`
 - `docs/distribution-playbook.md`
 - `docs/deployment.md`
+- `docs/remote-mcp.md`
+- `docs/marketing-launch.md`
