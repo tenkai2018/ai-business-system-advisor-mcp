@@ -4,9 +4,9 @@ This project includes a public, stateless remote MCP server target for Cloudflar
 
 ## Endpoints
 
-- Landing page: `https://<worker-subdomain>.workers.dev/`
-- Health check: `https://<worker-subdomain>.workers.dev/health`
-- Remote MCP: `https://<worker-subdomain>.workers.dev/mcp`
+- Landing page: `https://ai-business-system-advisor-mcp.henrytran-portfolio.workers.dev/`
+- Health check: `https://ai-business-system-advisor-mcp.henrytran-portfolio.workers.dev/health`
+- Remote MCP: `https://ai-business-system-advisor-mcp.henrytran-portfolio.workers.dev/mcp`
 
 ## Deploy
 
@@ -28,8 +28,8 @@ npm run test:remote -- http://localhost:8787/mcp
 After deployment:
 
 ```powershell
-curl https://<worker-subdomain>.workers.dev/health
-npm run test:remote -- https://<worker-subdomain>.workers.dev/mcp
+curl https://ai-business-system-advisor-mcp.henrytran-portfolio.workers.dev/health
+npm run test:remote -- https://ai-business-system-advisor-mcp.henrytran-portfolio.workers.dev/mcp
 ```
 
 ## Client Config
@@ -43,7 +43,7 @@ For stdio-only clients, use `mcp-remote`:
   "mcpServers": {
     "ai-business-system-advisor": {
       "command": "npx",
-      "args": ["mcp-remote", "https://<worker-subdomain>.workers.dev/mcp"]
+      "args": ["mcp-remote", "https://ai-business-system-advisor-mcp.henrytran-portfolio.workers.dev/mcp"]
     }
   }
 }

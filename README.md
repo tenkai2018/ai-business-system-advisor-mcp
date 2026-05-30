@@ -42,6 +42,12 @@ npx -y ai-business-system-advisor-mcp
 
 Remote MCP deployment is supported on Cloudflare Workers. See `docs/remote-mcp.md`.
 
+Remote MCP URL:
+
+```text
+https://ai-business-system-advisor-mcp.henrytran-portfolio.workers.dev/mcp
+```
+
 ## Tools
 
 - `analyze_business_context`

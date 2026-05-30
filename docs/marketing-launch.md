@@ -14,7 +14,7 @@ AI Business System Advisor MCP helps founders and operators answer:
 
 - npm: `https://www.npmjs.com/package/ai-business-system-advisor-mcp`
 - GitHub: `https://github.com/tenkai2018/ai-business-system-advisor-mcp`
-- Remote MCP: `https://<worker-subdomain>.workers.dev/mcp`
+- Remote MCP: `https://ai-business-system-advisor-mcp.henrytran-portfolio.workers.dev/mcp`
 
 ## Sample Launch Copy
 
@@ -28,7 +28,7 @@ Local install:
 npx -y ai-business-system-advisor-mcp
 
 Remote MCP:
-https://<worker-subdomain>.workers.dev/mcp
+https://ai-business-system-advisor-mcp.henrytran-portfolio.workers.dev/mcp
 ```
 
 ## Demo Prompts

@@ -8,6 +8,12 @@
     "url": "https://github.com/tenkai2018/ai-business-system-advisor-mcp",
     "source": "github"
   },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://ai-business-system-advisor-mcp.henrytran-portfolio.workers.dev/mcp"
+    }
+  ],
   "packages": [
     {
       "registryType": "npm",
