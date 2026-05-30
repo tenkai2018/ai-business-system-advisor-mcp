@@ -25,7 +25,9 @@ const dangerousRuntimePatterns = [
 const secretPatterns = [
   { label: "hardcoded API key style token", pattern: /\b(sk-|pk_|ghp_|github_pat_|npm_[A-Za-z0-9])/ },
   { label: "credential assignment", pattern: /\b(password|secret|api[_-]?key|token)\s*[:=]\s*["'][^"']{8,}["']/i },
-  { label: "private URL", pattern: /https?:\/\/(localhost|127\.0\.0\.1|10\.|192\.168\.|172\.(1[6-9]|2\d|3[0-1])\.)/i }
+  { label: "private URL", pattern: /https?:\/\/(localhost|127\.0\.0\.1|10\.|192\.168\.|172\.(1[6-9]|2\d|3[0-1])\.)/i },
+  { label: "local Windows path", pattern: /\b[A-Z]:[\\/](Users|HUYTQ|Projects|Documents|Downloads|Desktop)[\\/]/i },
+  { label: "local user path", pattern: /\b(C:\\Users\\|D:\\HUYTQ\\|ProdXSolution\\Projects\\)/i }
 ];
 
 async function main() {

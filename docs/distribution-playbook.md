@@ -10,19 +10,6 @@
 
 ## MCP Client Config
 
-For local source checkout:
-
-```json
-{
-  "mcpServers": {
-    "ai-business-system-advisor": {
-      "command": "node",
-      "args": ["D:/HUYTQ/ProdXSolution/Projects/AI Business System Advisor MCP/dist/src/index.js"]
-    }
-  }
-}
-```
-
 For npm package users:
 
 ```json
@@ -31,6 +18,18 @@ For npm package users:
     "ai-business-system-advisor": {
       "command": "npx",
       "args": ["-y", "ai-business-system-advisor-mcp"]
+    }
+  }
+}
+```
+
+For remote-capable clients:
+
+```json
+{
+  "mcpServers": {
+    "ai-business-system-advisor": {
+      "url": "https://ai-business-system-advisor-mcp.henrytran-portfolio.workers.dev/mcp"
     }
   }
 }

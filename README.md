@@ -6,35 +6,22 @@ It provides public-safe tools for business context analysis, customer touchpoint
 
 It is a first-pass review tool. It does not replace a full professional diagnostic or implementation project.
 
-## Install
+## Use With MCP Clients
 
-```bash
-npm install
-npm run build
-```
-
-## Run locally
-
-```bash
-npm run dev
-```
-
-For an MCP client, configure a stdio server command:
+For Claude Desktop, Cursor, Windsurf, Codex, or another stdio MCP client:
 
 ```json
 {
   "mcpServers": {
     "ai-business-system-advisor": {
-      "command": "node",
-      "args": ["D:/HUYTQ/ProdXSolution/Projects/AI Business System Advisor MCP/dist/src/index.js"]
+      "command": "npx",
+      "args": ["-y", "ai-business-system-advisor-mcp"]
     }
   }
 }
 ```
 
-Run `npm run build` before using the `node dist/...` command.
-
-Published npm command:
+You can also run the package directly:
 
 ```bash
 npx -y ai-business-system-advisor-mcp
@@ -46,6 +33,14 @@ Remote MCP URL:
 
 ```text
 https://ai-business-system-advisor-mcp.henrytran-portfolio.workers.dev/mcp
+```
+
+## Local Development
+
+```bash
+npm install
+npm run build
+npm run dev
 ```
 
 ## Tools
