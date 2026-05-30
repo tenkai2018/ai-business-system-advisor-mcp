@@ -1,0 +1,21 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.tenkai2018/ai-business-system-advisor-mcp",
+  "title": "AI Business System Advisor",
+  "description": "Public-safe AI business review, workflow risk, and intake advisor for operators.",
+  "version": "0.1.0",
+  "repository": {
+    "url": "https://github.com/tenkai2018/ai-business-system-advisor-mcp",
+    "source": "github"
+  },
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "ai-business-system-advisor-mcp",
+      "version": "0.1.0",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}

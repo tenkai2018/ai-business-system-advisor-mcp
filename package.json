@@ -1,0 +1,69 @@
+{
+  "name": "ai-business-system-advisor-mcp",
+  "version": "0.1.0",
+  "description": "Public-safe MCP server for first-pass AI business system reviews and intake packets.",
+  "type": "module",
+  "private": false,
+  "license": "UNLICENSED",
+  "mcpName": "io.github.tenkai2018/ai-business-system-advisor-mcp",
+  "main": "dist/src/index.js",
+  "bin": {
+    "ai-business-system-advisor-mcp": "dist/src/index.js"
+  },
+  "files": [
+    "dist/src",
+    "docs",
+    "README.md",
+    "LICENSE.md",
+    "SECURITY.md",
+    "PRIVACY.md",
+    "PRODUCT_SPEC.md",
+    "server.json"
+  ],
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ai-business-systems",
+    "ai-workflow",
+    "business-operations",
+    "human-in-the-loop"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tenkai2018/ai-business-system-advisor-mcp.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "demo": "tsx scripts/demo.ts",
+    "start": "node dist/src/index.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "typecheck": "tsc --noEmit",
+    "validate:registry": "tsx scripts/validate-registry.ts",
+    "verify:publish": "npm run typecheck && npm test && npm run build && npm run lint && npm run validate:registry && npm pack --dry-run"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.29.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.35.0",
+    "ajv": "^8.17.1",
+    "@types/node": "^20.19.25",
+    "eslint": "9.35.0",
+    "prettier": "^3.7.4",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "8.44.0",
+    "vitest": "^4.0.15"
+  }
+}
