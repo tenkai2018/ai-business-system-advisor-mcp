@@ -48,8 +48,12 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
+    "test:user": "tsx scripts/user-scenarios.ts",
+    "audit:spec": "tsx scripts/audit-spec.ts",
+    "audit:security": "tsx scripts/audit-security.ts",
     "validate:registry": "tsx scripts/validate-registry.ts",
-    "verify:publish": "npm run typecheck && npm test && npm run build && npm run lint && npm run validate:registry && npm pack --dry-run"
+    "verify:publish": "npm run typecheck && npm test && npm run build && npm run lint && npm run validate:registry && npm pack --dry-run",
+    "verify:prepublish": "npm run verify:publish && npm run test:user && npm run audit:spec && npm run audit:security"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.29.0",
