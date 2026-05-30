@@ -1,9 +1,16 @@
-import { FORBIDDEN_PUBLIC_TERMS, PRIVATE_METHODOLOGY_REFUSAL } from "../constants/guardrails.js";
+import {
+  FORBIDDEN_PUBLIC_PATTERNS,
+  FORBIDDEN_PUBLIC_TERMS,
+  PRIVATE_METHODOLOGY_REFUSAL
+} from "../constants/guardrails.js";
 import { redactPublicUnsafeText } from "./redaction.js";
 
 export function containsForbiddenTerm(text: string): boolean {
   const normalized = text.toLowerCase();
-  return FORBIDDEN_PUBLIC_TERMS.some((term) => normalized.includes(term.toLowerCase()));
+  return (
+    FORBIDDEN_PUBLIC_TERMS.some((term) => normalized.includes(term.toLowerCase())) ||
+    FORBIDDEN_PUBLIC_PATTERNS.some((pattern) => pattern.test(text))
+  );
 }
 
 export function isPrivateMethodologyRequest(input: string): boolean {

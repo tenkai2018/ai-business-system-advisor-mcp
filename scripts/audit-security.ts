@@ -1,6 +1,9 @@
 import { readdir, readFile } from "node:fs/promises";
 import { extname, join, relative, sep } from "node:path";
-import { FORBIDDEN_PUBLIC_TERMS } from "../src/constants/guardrails.js";
+import {
+  FORBIDDEN_PUBLIC_PATTERNS,
+  FORBIDDEN_PUBLIC_TERMS
+} from "../src/constants/guardrails.js";
 
 type Finding = {
   file: string;
@@ -26,8 +29,8 @@ const secretPatterns = [
   { label: "hardcoded API key style token", pattern: /\b(sk-|pk_|ghp_|github_pat_|npm_[A-Za-z0-9])/ },
   { label: "credential assignment", pattern: /\b(password|secret|api[_-]?key|token)\s*[:=]\s*["'][^"']{8,}["']/i },
   { label: "private URL", pattern: /https?:\/\/(localhost|127\.0\.0\.1|10\.|192\.168\.|172\.(1[6-9]|2\d|3[0-1])\.)/i },
-  { label: "local Windows path", pattern: /\b[A-Z]:[\\/](Users|HUYTQ|Projects|Documents|Downloads|Desktop)[\\/]/i },
-  { label: "local user path", pattern: /\b(C:\\Users\\|D:\\HUYTQ\\|ProdXSolution\\Projects\\)/i }
+  { label: "local Windows path", pattern: /\b[A-Z]:[\\/](Users|Projects|Documents|Downloads|Desktop)[\\/]/i },
+  { label: "local project path", pattern: /\b[A-Z]:\\[^\\\r\n]{1,80}\\[^\\\r\n]{1,80}\\Projects\\/i }
 ];
 
 async function main() {
@@ -58,6 +61,11 @@ async function main() {
     for (const term of FORBIDDEN_PUBLIC_TERMS) {
       if (lowered.includes(term.toLowerCase())) {
         findings.push({ file: relativePath(file), message: `Public output file contains forbidden term '${term}'.` });
+      }
+    }
+    for (const pattern of FORBIDDEN_PUBLIC_PATTERNS) {
+      if (pattern.test(text)) {
+        findings.push({ file: relativePath(file), message: `Public output file matches forbidden private-methodology pattern '${pattern}'.` });
       }
     }
   }

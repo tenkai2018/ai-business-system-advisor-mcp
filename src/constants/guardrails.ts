@@ -1,22 +1,26 @@
 export const FORBIDDEN_PUBLIC_TERMS = [
-  "7-layer",
-  "7 layers",
-  "seven-layer",
-  "3-layer",
-  "3 layers",
-  "three-layer",
-  "hcai skills",
+  "private methodology",
+  "internal methodology",
   "internal skill",
+  "internal skills",
   "skill library",
   "orchestrator skill",
   "private skill engine",
   "internal orchestrator",
   "private framework",
   "hidden framework",
+  "hidden layer",
+  "hidden layers",
   "proprietary prompt",
-  "internal scoring weights",
-  "AGENTS.md",
-  "ROUTER.md"
+  "scoring weights",
+  "private architecture",
+  "implementation system"
+];
+
+export const FORBIDDEN_PUBLIC_PATTERNS = [
+  /\b\d+\s*[- ]?\s*layers?\b/i,
+  /\b(?:private|internal|hidden|proprietary)\s+(?:prompt|framework|method|methodology|architecture|system|scoring|skill|skills)\b/i,
+  /\b[A-Z]{5,12}\.md\b/
 ];
 
 export const PRIVATE_METHODOLOGY_REFUSAL =

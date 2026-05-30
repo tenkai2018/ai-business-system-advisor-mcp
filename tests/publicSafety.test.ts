@@ -18,7 +18,7 @@ describe("public safety", () => {
 
   it("redacts forbidden public terms", () => {
     const redacted = redactPublicUnsafeText(
-      "Use the 7-layer framework and internal skill library."
+      "Use the numbered-layer framework and internal skill library."
     );
 
     expect(containsForbiddenTerm(redacted)).toBe(false);
