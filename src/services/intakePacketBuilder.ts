@@ -7,14 +7,23 @@ import { recommendFirstWorkflow } from "./workflowAdvisor.js";
 export function buildIntakePacket(input: IntakePacketInput): IntakePacketResult {
   const context = analyzeBusinessContext(input);
   const touchpoints = mapCustomerTouchpoints(input);
-  const bottlenecks = identifyBottlenecks(input);
-  const opportunities = evaluateAiOpportunities(input);
+  const analysisInput = {
+    ...input,
+    businessContext:
+      typeof input.businessContext === "string"
+        ? input.businessContext
+        : input.businessContext
+          ? JSON.stringify(input.businessContext)
+          : undefined
+  };
+  const bottlenecks = identifyBottlenecks(analysisInput);
+  const opportunities = evaluateAiOpportunities(analysisInput);
   const risks = assessTrustControlRisks(input);
   const workflow = recommendFirstWorkflow(input);
   const nextStep = recommendNextStep(input);
 
   const packet = {
-    businessContext: {
+    businessContext: input.businessContext ?? {
       businessType: input.businessType ?? "",
       targetCustomer: input.targetCustomer ?? "",
       coreOffer: input.offer ?? "",
@@ -24,14 +33,23 @@ export function buildIntakePacket(input: IntakePacketInput): IntakePacketResult 
     },
     currentProblem: input.currentProblem ?? "",
     currentWorkflow: input.currentWorkflow ?? "",
-    customerTouchpoints: touchpoints.touchpoints,
-    bottlenecks: bottlenecks.bottlenecks,
+    customerTouchpoints: input.touchpointMap ?? touchpoints.touchpoints,
+    bottlenecks: input.bottleneckSummary ?? {
+      revenue: bottlenecks.revenueBottlenecks,
+      operations: bottlenecks.operationalBottlenecks,
+      customerExperience: bottlenecks.customerExperienceBottlenecks,
+      trustControl: bottlenecks.trustControlBottlenecks
+    },
     opportunities: opportunities.opportunities,
-    risks: risks.risks,
-    recommendedFirstWorkflow: workflow,
-    recommendedNextStepCategory: nextStep,
-    missingInformation: context.missingInformation,
-    notesForPrivateReview:
+    risks: input.riskSummary ?? risks,
+    recommendedFirstWorkflow: input.recommendedWorkflow ?? workflow,
+    recommendedNextStepCategory: input.recommendedNextStep ?? nextStep,
+    missingInformation: [
+      ...context.missingInformation,
+      ...workflow.missingInformation,
+      ...nextStep.missingInformation
+    ],
+    notesForPrivateReview: input.userNotes ??
       "Use this packet to confirm workflow evidence, data readiness, owner, review rules, escalation rules, success metrics, and implementation constraints."
   };
 
@@ -52,19 +70,24 @@ ${packet.currentProblem}
 ${packet.currentWorkflow}
 
 ## Customer Touchpoints
-${touchpoints.touchpoints.map((item) => `- ${item.stage}: ${item.classification}; ${item.reviewRule}`).join("\n")}
+${touchpoints.touchpoints.map((item) => `- ${item.stage}: ${item.classification}; ${item.suggestedControl}`).join("\n")}
 
 ## Likely Bottlenecks
-${bottlenecks.bottlenecks.map((item) => `- ${item.category}: ${item.description}`).join("\n")}
+${[
+  ...bottlenecks.revenueBottlenecks,
+  ...bottlenecks.operationalBottlenecks,
+  ...bottlenecks.customerExperienceBottlenecks,
+  ...bottlenecks.trustControlBottlenecks
+].map((item) => `- ${item}`).join("\n")}
 
 ## AI Opportunity Areas
-${opportunities.opportunities.map((item) => `- ${item.name}: ${item.aiRole}`).join("\n")}
+${opportunities.opportunities.map((item) => `- ${item.name}: ${item.recommendedFirstVersion}`).join("\n")}
 
 ## Trust & Control Risks
-${risks.risks.map((item) => `- ${item.category}: ${item.control}`).join("\n")}
+${[risks.riskSummary, ...risks.requiredControls].map((item) => `- ${item}`).join("\n")}
 
 ## Recommended First Workflow
-- Workflow: ${workflow.workflow}
+- Workflow: ${workflow.recommendedWorkflow}
 - AI role: ${workflow.aiRole}
 - Human role: ${workflow.humanRole}
 - Review rule: ${workflow.reviewRule}
@@ -72,17 +95,20 @@ ${risks.risks.map((item) => `- ${item.category}: ${item.control}`).join("\n")}
 - Success metrics: ${workflow.successMetrics.join(", ")}
 
 ## Recommended Next Step Category
-${nextStep.label}
+${nextStep.recommendedPath}
 
 ## Missing Information
-${context.missingInformation.map((item) => `- ${item}`).join("\n")}
+${packet.missingInformation.map((item) => `- ${item}`).join("\n")}
 
 ## Notes for Private Review
 ${packet.notesForPrivateReview}`;
 
   return ensurePublicSafe({
-    markdown,
-    packet,
+    packetMarkdown: markdown,
+    packetJson: packet,
+    missingInformation: packet.missingInformation,
+    recommendedPrivateReview:
+      "Prepare this intake packet for deeper private review of workflow evidence, risk controls, implementation readiness, and next-step fit.",
     confidence: context.confidence
   });
 }

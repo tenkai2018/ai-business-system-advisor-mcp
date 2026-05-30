@@ -1,22 +1,31 @@
 import { z } from "zod";
 import { ConfidenceSchema, RiskLevelSchema } from "./common.schema.js";
-import { BusinessContextInputSchema } from "./businessContext.schema.js";
 
-export const RiskSchema = z.object({
-  category: z.string(),
-  level: RiskLevelSchema,
-  description: z.string(),
-  control: z.string()
-});
-
-export const RisksInputSchema = BusinessContextInputSchema.extend({
-  proposedWorkflow: z.string().optional()
+export const RisksInputSchema = z.object({
+  workflowIdea: z.string().optional(),
+  proposedWorkflow: z.string().optional(),
+  customerFacing: z.boolean().optional(),
+  usesSensitiveData: z.boolean().optional(),
+  canAffectMoney: z.boolean().optional(),
+  canAffectBrandTrust: z.boolean().optional(),
+  requiresExpertJudgment: z.boolean().optional(),
+  currentControls: z.string().optional(),
+  businessType: z.string().optional(),
+  currentProblem: z.string().optional(),
+  currentWorkflow: z.string().optional(),
+  aiIdea: z.string().optional(),
+  riskConcerns: z.string().optional()
 });
 
 export const RisksResultSchema = z.object({
-  risks: z.array(RiskSchema),
-  dataBoundaries: z.array(z.string()),
-  reviewRules: z.array(z.string()),
+  riskLevel: RiskLevelSchema,
+  riskSummary: z.string(),
+  requiredControls: z.array(z.string()),
+  humanReviewRules: z.array(z.string()),
+  dataBoundaryWarnings: z.array(z.string()),
+  escalationTriggers: z.array(z.string()),
+  notRecommendedActions: z.array(z.string()),
+  missingInformation: z.array(z.string()),
   confidence: ConfidenceSchema
 });
 

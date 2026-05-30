@@ -1,5 +1,5 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { BottlenecksInputSchema } from "../schemas/bottlenecks.schema.js";
+import { BottlenecksInputSchema, BottlenecksResultSchema } from "../schemas/bottlenecks.schema.js";
 import { identifyBottlenecks } from "../services/analysis.js";
 import { ensurePublicSafe } from "../services/publicSafety.js";
 import { maybeRefusePrivateRequest, toolResult } from "./result.js";
@@ -11,7 +11,8 @@ export function registerIdentifyBottlenecks(server: McpServer): void {
       title: "Identify bottlenecks",
       description:
         "Identify likely revenue, operations, customer experience, and trust/control bottlenecks from the supplied context.",
-      inputSchema: BottlenecksInputSchema.shape
+      inputSchema: BottlenecksInputSchema.shape,
+      outputSchema: BottlenecksResultSchema.shape
     },
     (args) => maybeRefusePrivateRequest(args) ?? toolResult(ensurePublicSafe(identifyBottlenecks(args)))
   );

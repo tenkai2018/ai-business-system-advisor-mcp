@@ -3,11 +3,22 @@ import { ConfidenceSchema } from "./common.schema.js";
 import { BusinessContextInputSchema } from "./businessContext.schema.js";
 
 export const MiniReportInputSchema = BusinessContextInputSchema.extend({
-  preferredNextStep: z.string().optional()
+  businessSnapshot: z.string().optional(),
+  bottlenecks: z.array(z.string()).optional(),
+  opportunities: z.array(z.string()).optional(),
+  risks: z.array(z.string()).optional(),
+  recommendedWorkflow: z.string().optional(),
+  nextStep: z.string().optional(),
+  preferredNextStep: z.string().optional(),
+  confidence: ConfidenceSchema.optional()
 });
 
 export const MiniReportResultSchema = z.object({
-  markdown: z.string(),
+  reportMarkdown: z.string(),
+  shortSummary: z.string(),
+  recommendedAction: z.string(),
+  disclaimer: z.string(),
+  missingInformation: z.array(z.string()),
   confidence: ConfidenceSchema
 });
 

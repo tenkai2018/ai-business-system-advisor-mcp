@@ -14,23 +14,25 @@ describe("report and intake builders", () => {
   it("generates required mini report sections", () => {
     const report = buildMiniReport(input);
 
-    expect(report.markdown).toContain("Business Snapshot");
-    expect(report.markdown).toContain("Likely Bottlenecks");
-    expect(report.markdown).toContain("AI Opportunity Areas");
-    expect(report.markdown).toContain("Trust & Control Risks");
-    expect(report.markdown).toContain("Recommended First Workflow");
-    expect(report.markdown).toContain("Recommended Next Step");
-    expect(report.markdown).toContain("Important Note");
-    expect(containsForbiddenTerm(report.markdown)).toBe(false);
+    expect(report.reportMarkdown).toContain("Business Snapshot");
+    expect(report.reportMarkdown).toContain("Likely Bottlenecks");
+    expect(report.reportMarkdown).toContain("AI Opportunity Areas");
+    expect(report.reportMarkdown).toContain("Trust & Control Risks");
+    expect(report.reportMarkdown).toContain("Recommended First Workflow");
+    expect(report.reportMarkdown).toContain("Recommended Next Step");
+    expect(report.reportMarkdown).toContain("Important Note");
+    expect(report).toHaveProperty("missingInformation");
+    expect(containsForbiddenTerm(report.reportMarkdown)).toBe(false);
   });
 
   it("generates intake packet markdown and JSON", () => {
     const packet = buildIntakePacket(input);
 
-    expect(packet.markdown).toContain("Business Review Intake Packet");
-    expect(packet.markdown).toContain("Missing Information");
-    expect(packet.packet).toHaveProperty("businessContext");
-    expect(packet.packet).toHaveProperty("recommendedFirstWorkflow");
-    expect(containsForbiddenTerm(packet.markdown)).toBe(false);
+    expect(packet.packetMarkdown).toContain("Business Review Intake Packet");
+    expect(packet.packetMarkdown).toContain("Missing Information");
+    expect(packet.packetJson).toHaveProperty("businessContext");
+    expect(packet.packetJson).toHaveProperty("recommendedFirstWorkflow");
+    expect(packet).toHaveProperty("missingInformation");
+    expect(containsForbiddenTerm(packet.packetMarkdown)).toBe(false);
   });
 });

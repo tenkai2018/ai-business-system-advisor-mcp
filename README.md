@@ -76,7 +76,7 @@ npm run verify:publish
 
 ## Public Safety
 
-The server does not reveal private methodology, hidden prompts, scoring weights, internal routing, or private delivery architecture. It uses business-facing language and refuses requests for private implementation details.
+The server uses business-facing language and refuses requests for private implementation details. Public reports focus on business context, workflow fit, risk controls, recommended next steps, and missing information.
 
 ## Publishing
 

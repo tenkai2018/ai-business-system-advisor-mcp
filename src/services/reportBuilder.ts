@@ -12,25 +12,31 @@ export function buildMiniReport(input: MiniReportInput): MiniReportResult {
   const risks = assessTrustControlRisks(input);
   const workflow = recommendFirstWorkflow(input);
   const nextStep = recommendNextStep(input);
+  const bottleneckList = [
+    ...bottlenecks.revenueBottlenecks,
+    ...bottlenecks.operationalBottlenecks,
+    ...bottlenecks.customerExperienceBottlenecks,
+    ...bottlenecks.trustControlBottlenecks
+  ];
 
   const markdown = `# Mini Business System Review
 
 ## 1. Business Snapshot
-${context.summary}
+${input.businessSnapshot ?? context.businessSnapshot}
 
 ## 2. Likely Bottlenecks
-${bottlenecks.bottlenecks.map((item) => `- ${item.description} ${item.rootCauseHypothesis}`).join("\n")}
+${(input.bottlenecks ?? bottleneckList).map((item) => `- ${item}`).join("\n")}
 
 ## 3. AI Opportunity Areas
-${opportunities.opportunities.map((item) => `- ${item.name}: ${item.aiRole}`).join("\n")}
+${(input.opportunities ?? opportunities.opportunities.map((item) => `${item.name}: ${item.recommendedFirstVersion}`)).map((item) => `- ${item}`).join("\n")}
 
 ## 4. Trust & Control Risks
-${risks.risks.slice(0, 3).map((item) => `- ${item.description} Control: ${item.control}`).join("\n")}
+${(input.risks ?? [risks.riskSummary, ...risks.humanReviewRules.slice(0, 2)]).map((item) => `- ${item}`).join("\n")}
 
 ## 5. Recommended First Workflow
-**Workflow:** ${workflow.workflow}
+**Workflow:** ${input.recommendedWorkflow ?? workflow.recommendedWorkflow}
 
-**Why this first:** ${workflow.whyThisFirst}
+**Why this first:** ${workflow.whyThisWorkflow}
 
 **AI role:** ${workflow.aiRole}
 
@@ -44,13 +50,21 @@ ${risks.risks.slice(0, 3).map((item) => `- ${item.description} Control: ${item.c
 ${workflow.successMetrics.map((metric) => `- ${metric}`).join("\n")}
 
 ## 6. Recommended Next Step
-${nextStep.label}: ${nextStep.suggestedAction}
+${input.nextStep ?? nextStep.recommendedPath}: ${nextStep.suggestedAction}
 
 ## Important Note
 ${IMPORTANT_NOTE}`;
 
   return ensurePublicSafe({
-    markdown,
-    confidence: context.confidence
+    reportMarkdown: markdown,
+    shortSummary: context.businessSnapshot,
+    recommendedAction: nextStep.suggestedAction,
+    disclaimer: IMPORTANT_NOTE,
+    missingInformation: [
+      ...context.missingInformation,
+      ...workflow.missingInformation,
+      ...nextStep.missingInformation
+    ],
+    confidence: input.confidence ?? context.confidence
   });
 }

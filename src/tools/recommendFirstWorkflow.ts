@@ -1,5 +1,5 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { WorkflowInputSchema } from "../schemas/workflow.schema.js";
+import { WorkflowInputSchema, WorkflowRecommendationSchema } from "../schemas/workflow.schema.js";
 import { ensurePublicSafe } from "../services/publicSafety.js";
 import { recommendFirstWorkflow } from "../services/workflowAdvisor.js";
 import { maybeRefusePrivateRequest, toolResult } from "./result.js";
@@ -11,7 +11,8 @@ export function registerRecommendFirstWorkflow(server: McpServer): void {
       title: "Recommend first workflow",
       description:
         "Recommend a narrow, measurable, human-reviewable first AI-assisted workflow with roles, review rule, escalation rule, and metrics.",
-      inputSchema: WorkflowInputSchema.shape
+      inputSchema: WorkflowInputSchema.shape,
+      outputSchema: WorkflowRecommendationSchema.shape
     },
     (args) => maybeRefusePrivateRequest(args) ?? toolResult(ensurePublicSafe(recommendFirstWorkflow(args)))
   );

@@ -1,19 +1,25 @@
 import { z } from "zod";
 import { ConfidenceSchema } from "./common.schema.js";
-import { BusinessContextInputSchema } from "./businessContext.schema.js";
-
-export const BottleneckSchema = z.object({
-  category: z.enum(["revenue", "operations", "customer_experience", "trust_control"]),
-  description: z.string(),
-  rootCauseHypothesis: z.string(),
-  suggestedIntervention: z.string()
+export const BottlenecksInputSchema = z.object({
+  businessContext: z.string().optional(),
+  businessType: z.string().optional(),
+  currentProblem: z.string().optional(),
+  currentWorkflow: z.string().optional(),
+  customerComplaints: z.string().optional(),
+  teamPainPoints: z.string().optional(),
+  metrics: z.string().optional(),
+  aiIdea: z.string().optional(),
+  riskConcerns: z.string().optional()
 });
 
-export const BottlenecksInputSchema = BusinessContextInputSchema;
-
 export const BottlenecksResultSchema = z.object({
-  bottlenecks: z.array(BottleneckSchema),
-  candidateUseCases: z.array(z.string()),
+  revenueBottlenecks: z.array(z.string()),
+  operationalBottlenecks: z.array(z.string()),
+  customerExperienceBottlenecks: z.array(z.string()),
+  trustControlBottlenecks: z.array(z.string()),
+  mostLikelyRootCause: z.string(),
+  bottleneckSummary: z.string(),
+  missingInformation: z.array(z.string()),
   confidence: ConfidenceSchema
 });
 

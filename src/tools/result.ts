@@ -7,7 +7,15 @@ export function maybeRefusePrivateRequest(input: unknown): CallToolResult | null
     return null;
   }
 
-  return toolResult(privateMethodologyResponse());
+  return {
+    content: [
+      {
+        type: "text",
+        text: JSON.stringify(privateMethodologyResponse(), null, 2)
+      }
+    ],
+    isError: true
+  };
 }
 
 export function toolResult(structuredContent: Record<string, unknown>): CallToolResult {

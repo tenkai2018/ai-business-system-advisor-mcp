@@ -1,19 +1,33 @@
 import { z } from "zod";
-import { ConfidenceSchema } from "./common.schema.js";
+import { ConfidenceSchema, ReadinessLevelSchema } from "./common.schema.js";
 import { BusinessContextInputSchema } from "./businessContext.schema.js";
 
 export const NextStepInputSchema = BusinessContextInputSchema.extend({
-  riskLevel: z.enum(["low", "medium", "high"]).optional(),
+  userGoal: z.string().optional(),
+  problemComplexity: ReadinessLevelSchema.optional(),
+  implementationReadiness: ReadinessLevelSchema.optional(),
+  riskLevel: ReadinessLevelSchema.optional(),
   readiness: z.enum(["low", "medium", "high"]).optional(),
+  wantsSelfGuided: z.boolean().optional(),
+  wantsDoneForYou: z.boolean().optional(),
+  timeline: z.string().optional(),
   preference: z.enum(["self_guided", "done_for_you", "unsure"]).optional(),
   hasExistingAutomation: z.boolean().optional()
 });
 
 export const NextStepResultSchema = z.object({
-  id: z.string(),
-  label: z.string(),
-  description: z.string(),
+  recommendedPath: z.enum([
+    "self_guided_resource",
+    "deeper_diagnostic",
+    "implementation_ready_docs",
+    "ai_ready_system_build",
+    "monthly_review"
+  ]),
+  reason: z.string(),
+  readinessLevel: z.enum(["low", "medium", "high"]),
   suggestedAction: z.string(),
+  alternativePaths: z.array(z.string()),
+  missingInformation: z.array(z.string()),
   confidence: ConfidenceSchema
 });
 

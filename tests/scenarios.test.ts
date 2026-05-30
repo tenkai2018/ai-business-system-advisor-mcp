@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { evaluateAiOpportunities } from "../src/services/analysis.js";
+import { assessTrustControlRisks, evaluateAiOpportunities } from "../src/services/analysis.js";
 import { recommendNextStep } from "../src/services/nextStepRouter.js";
 import { recommendFirstWorkflow } from "../src/services/workflowAdvisor.js";
 import { BusinessContextInputSchema } from "../src/schemas/businessContext.schema.js";
@@ -24,8 +24,9 @@ describe("business review scenarios", () => {
       goal90Days: "get more qualified sales calls"
     });
 
-    expect(workflow.workflow.toLowerCase()).toContain("lead research");
+    expect(workflow.recommendedWorkflow.toLowerCase()).toContain("lead research");
     expect(workflow.humanRole.toLowerCase()).toContain("approve");
+    expect(workflow).toHaveProperty("missingInformation");
   });
 
   it("does not recommend full autonomy for ecommerce support complaints", () => {
@@ -38,10 +39,11 @@ describe("business review scenarios", () => {
 
     const workflow = recommendFirstWorkflow(input);
     const opportunities = evaluateAiOpportunities(input);
+    const risks = assessTrustControlRisks(input);
 
-    expect(workflow.riskLevel).toBe("high");
-    expect(workflow.workflow.toLowerCase()).toContain("support triage");
-    expect(opportunities.avoidedUseCases.join(" ").toLowerCase()).toContain("fully autonomous");
+    expect(risks.riskLevel).toBe("high");
+    expect(workflow.recommendedWorkflow.toLowerCase()).toContain("support triage");
+    expect(opportunities.warnings.join(" ").toLowerCase()).toContain("fully autonomous");
   });
 
   it("routes low-risk self-guided users to self-guided resource", () => {
@@ -53,7 +55,7 @@ describe("business review scenarios", () => {
       readiness: "medium"
     });
 
-    expect(nextStep.id).toBe("self_guided_resource");
+    expect(nextStep.recommendedPath).toBe("self_guided_resource");
   });
 
   it("routes existing unreliable automation to monthly review", () => {
@@ -63,6 +65,6 @@ describe("business review scenarios", () => {
       hasExistingAutomation: true
     });
 
-    expect(nextStep.id).toBe("monthly_review");
+    expect(nextStep.recommendedPath).toBe("monthly_review");
   });
 });

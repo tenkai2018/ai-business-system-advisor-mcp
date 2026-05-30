@@ -36,7 +36,7 @@ describe("public safety", () => {
     });
 
     for (const term of FORBIDDEN_PUBLIC_TERMS) {
-      expect(report.markdown.toLowerCase()).not.toContain(term.toLowerCase());
+      expect(report.reportMarkdown.toLowerCase()).not.toContain(term.toLowerCase());
     }
   });
 });

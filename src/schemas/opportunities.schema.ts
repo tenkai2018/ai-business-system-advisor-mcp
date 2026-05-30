@@ -1,22 +1,45 @@
 import { z } from "zod";
 import { ConfidenceSchema, RiskLevelSchema } from "./common.schema.js";
-import { BusinessContextInputSchema } from "./businessContext.schema.js";
 
 export const OpportunitySchema = z.object({
   name: z.string(),
-  aiRole: z.string(),
-  businessValue: z.string(),
-  riskLevel: RiskLevelSchema,
-  humanReviewRequired: z.boolean()
+  summary: z.string(),
+  priority: z.enum(["high", "medium", "low", "not_recommended_yet"]),
+  businessValueScore: z.number().min(1).max(5),
+  implementationReadinessScore: z.number().min(1).max(5),
+  trustRiskLevel: RiskLevelSchema,
+  recommendedFirstVersion: z.string(),
+  requiredHumanControl: z.string()
 });
 
-export const OpportunitiesInputSchema = BusinessContextInputSchema.extend({
-  candidateUseCases: z.array(z.string()).optional()
+export const CandidateUseCaseSchema = z.union([
+  z.string(),
+  z.object({
+    name: z.string(),
+    description: z.string(),
+    customerFacing: z.boolean().optional(),
+    riskIfWrong: z.string().optional(),
+    availableData: z.string().optional(),
+    expectedImpact: z.string().optional(),
+    currentControls: z.string().optional()
+  })
+]);
+
+export const OpportunitiesInputSchema = z.object({
+  businessContext: z.string().optional(),
+  businessType: z.string().optional(),
+  currentProblem: z.string().optional(),
+  currentWorkflow: z.string().optional(),
+  aiIdea: z.string().optional(),
+  riskConcerns: z.string().optional(),
+  candidateUseCases: z.array(CandidateUseCaseSchema).optional()
 });
 
 export const OpportunitiesResultSchema = z.object({
   opportunities: z.array(OpportunitySchema),
-  avoidedUseCases: z.array(z.string()),
+  recommendedFirstOpportunity: z.string().optional(),
+  warnings: z.array(z.string()),
+  missingInformation: z.array(z.string()),
   confidence: ConfidenceSchema
 });
 
