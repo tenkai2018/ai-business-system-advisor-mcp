@@ -103,11 +103,30 @@ Ask your AI assistant:
 ## Example Output
 
 ```text
-AI Workflow Readiness: Medium
-Recommended First Workflow: Lead research and qualification with human-approved proposal drafting
-Trust Risk: Medium
-Human Review Rule: Human approval is required before customer-facing promises, pricing, scope, or exceptions.
-Missing Information: ideal customer criteria, proposal rules, approved claims, success metrics, escalation triggers
+Mini Business System Review
+
+Business Snapshot:
+A service agency sells conversion and landing page work to ecommerce brands. Sales capacity is constrained by manual lead research, inconsistent qualification, and proposal drafting.
+
+Likely Bottlenecks:
+- Lead research takes too long before a sales call.
+- Proposal quality depends on expert availability.
+- Customer-facing claims need clearer approval rules.
+
+Recommended First Workflow:
+AI prepares a lead research and qualification brief, then drafts proposal sections from approved language. A human reviews lead fit, scope, pricing, claims, and final customer-facing messages.
+
+Trust And Control Risk:
+Medium. The workflow can affect revenue, brand trust, and customer expectations, so AI should prepare work but not send promises or pricing without approval.
+
+Success Metrics:
+- qualified calls booked
+- proposal cycle time
+- human edit rate
+- lead-to-call conversion
+
+Missing Information:
+ideal customer criteria, approved claims, disallowed claims, proposal rules, escalation triggers, and success metrics
 ```
 
 ## Privacy And Security
