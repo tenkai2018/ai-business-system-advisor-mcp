@@ -3,7 +3,7 @@
   "name": "io.github.tenkai2018/ai-business-system-advisor-mcp",
   "title": "AI Business System Advisor",
   "description": "Public-safe AI business review, workflow risk, and intake advisor for operators.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "repository": {
     "url": "https://github.com/tenkai2018/ai-business-system-advisor-mcp",
     "source": "github"
@@ -18,7 +18,7 @@
     {
       "registryType": "npm",
       "identifier": "ai-business-system-advisor-mcp",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "transport": {
         "type": "stdio"
       }
