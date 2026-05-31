@@ -1,5 +1,7 @@
 # AI Business System Advisor MCP
 
+[![smithery badge](https://smithery.ai/badge/prodxsolution/ai-business-system-advisor-mcp)](https://smithery.ai/servers/prodxsolution/ai-business-system-advisor-mcp)
+
 Find the safest first AI workflow for your business.
 
 AI Business System Advisor MCP helps founders, operators, consultants, and small teams review business workflows, AI opportunities, trust/control risks, and implementation readiness before building AI agents or automation.
@@ -59,6 +61,12 @@ For remote MCP clients, use:
 
 ```text
 https://mcp.prodxsolution.com/ai-business-system-advisor/mcp
+```
+
+Smithery listing:
+
+```text
+https://smithery.ai/servers/prodxsolution/ai-business-system-advisor-mcp
 ```
 
 ## Available Tools
