@@ -3,7 +3,7 @@
   "name": "io.github.tenkai2018/ai-business-system-advisor-mcp",
   "title": "AI Business System Advisor",
   "description": "Find the safest first AI workflow before investing in AI agents or automation.",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "repository": {
     "url": "https://github.com/tenkai2018/ai-business-system-advisor-mcp",
     "source": "github"
@@ -11,14 +11,14 @@
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://ai-business-system-advisor-mcp.henrytran-portfolio.workers.dev/mcp"
+      "url": "https://ai-business-system-advisor-mcp.prodxsolution.workers.dev/mcp"
     }
   ],
   "packages": [
     {
       "registryType": "npm",
       "identifier": "ai-business-system-advisor-mcp",
-      "version": "0.1.6",
+      "version": "0.1.7",
       "transport": {
         "type": "stdio"
       }

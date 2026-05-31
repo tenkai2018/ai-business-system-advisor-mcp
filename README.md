@@ -58,7 +58,7 @@ npx -y ai-business-system-advisor-mcp
 For remote MCP clients, use:
 
 ```text
-https://ai-business-system-advisor-mcp.henrytran-portfolio.workers.dev/mcp
+https://ai-business-system-advisor-mcp.prodxsolution.workers.dev/mcp
 ```
 
 ## Available Tools
