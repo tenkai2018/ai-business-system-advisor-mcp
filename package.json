@@ -1,6 +1,6 @@
 {
   "name": "ai-business-system-advisor-mcp",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Find the safest first AI workflow before investing in AI agents or automation.",
   "type": "module",
   "private": false,
