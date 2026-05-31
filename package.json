@@ -41,7 +41,7 @@
   "homepage": "https://mcp.prodxsolution.com/ai-business-system-advisor",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tenkai2018/ai-business-system-advisor-mcp.git"
+    "url": "git+https://github.com/tenkai2018/ai-business-system-advisor-mcp.git"
   },
   "publishConfig": {
     "access": "public"
