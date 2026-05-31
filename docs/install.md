@@ -28,7 +28,7 @@ npx -y ai-business-system-advisor-mcp
 Use this remote MCP URL in clients that support Streamable HTTP:
 
 ```text
-https://ai-business-system-advisor-mcp.prodxsolution.workers.dev/mcp
+https://mcp.prodxsolution.com/ai-business-system-advisor/mcp
 ```
 
 ## Good First Questions

@@ -3,7 +3,7 @@
 Use this URL in MCP clients that support remote Streamable HTTP servers:
 
 ```text
-https://ai-business-system-advisor-mcp.prodxsolution.workers.dev/mcp
+https://mcp.prodxsolution.com/ai-business-system-advisor/mcp
 ```
 
 Good first prompt:

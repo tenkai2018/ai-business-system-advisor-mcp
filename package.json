@@ -1,6 +1,6 @@
 {
   "name": "ai-business-system-advisor-mcp",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Find the safest first AI workflow before investing in AI agents or automation.",
   "type": "module",
   "private": false,
@@ -38,7 +38,7 @@
     "consulting",
     "automation-readiness"
   ],
-  "homepage": "https://ai-business-system-advisor-mcp.prodxsolution.workers.dev/",
+  "homepage": "https://mcp.prodxsolution.com/ai-business-system-advisor",
   "repository": {
     "type": "git",
     "url": "https://github.com/tenkai2018/ai-business-system-advisor-mcp.git"

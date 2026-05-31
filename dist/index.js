@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-const REMOTE_MCP_URL = "https://ai-business-system-advisor-mcp.prodxsolution.workers.dev/mcp";
+const REMOTE_MCP_URL = "https://mcp.prodxsolution.com/ai-business-system-advisor/mcp";
 const localTransport = new StdioServerTransport();
 const remoteTransport = new StreamableHTTPClientTransport(new URL(REMOTE_MCP_URL));
 function isInitializeResponse(message) {
