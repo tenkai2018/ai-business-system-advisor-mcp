@@ -1,6 +1,6 @@
 # Public Safety Boundary
 
-This MCP is a public-safe diagnostic and intake layer.
+This MCP is a public-safe diagnostic and intake tool.
 
 It can discuss:
 

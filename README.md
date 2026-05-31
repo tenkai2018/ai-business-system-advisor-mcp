@@ -144,6 +144,5 @@ It does not expose protected implementation details, exact formulas, confidentia
 ## Roadmap
 
 - More fictional sample reviews for common business types.
-- Optional custom-domain remote MCP endpoint.
-- Public website workflow for guided mini reviews.
+- Guided public workflow for mini reviews and intake packets.
 - Additional public resources for AI workflow readiness and human review design.
