@@ -1,7 +1,7 @@
 {
   "name": "ai-business-system-advisor-mcp",
-  "version": "0.1.5",
-  "description": "Review business workflows, AI opportunities, trust/control risks, and implementation readiness before building AI agents or automation.",
+  "version": "0.1.6",
+  "description": "Find the safest first AI workflow before investing in AI agents or automation.",
   "type": "module",
   "private": false,
   "license": "SEE LICENSE IN LICENSE.md",
